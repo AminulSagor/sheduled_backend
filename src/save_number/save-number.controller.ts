@@ -6,8 +6,13 @@ export class SaveNumberController {
   constructor(private readonly saveNumberService: SaveNumberService) {}
 
   @Post()
-  async save(@Body() body: any) {
+async save(@Body() body: any) {
+  if (Array.isArray(body)) {
+    return this.saveNumberService.saveMany(body);
+  } else {
     const { deviceId, name, phoneNumber, notes } = body;
     return this.saveNumberService.save(deviceId, name, phoneNumber, notes);
   }
+}
+
 }

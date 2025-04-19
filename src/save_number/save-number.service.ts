@@ -14,10 +14,23 @@ export class SaveNumberService {
     if (!deviceId || !name || !phoneNumber) {
       return { status: 'error', message: 'deviceId, name, and phoneNumber are required' };
     }
-
+  
+    // Check if number already exists for the same device
+    const existing = await this.numberRepo.findOne({
+      where: { deviceId, phoneNumber },
+    });
+  
+    if (existing) {
+      return {
+        status: 'duplicate',
+        message: 'This number already exists for this device',
+      };
+    }
+  
     const newEntry = this.numberRepo.create({ deviceId, name, phoneNumber, notes });
     await this.numberRepo.save(newEntry);
-
+  
     return { status: 'success', message: 'Number saved successfully' };
   }
+  
 }

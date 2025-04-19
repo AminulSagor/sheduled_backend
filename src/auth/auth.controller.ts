@@ -11,3 +11,4 @@ export class AuthController {
     return this.authService.validateDevice(body.deviceId);
   }
 }
+ 

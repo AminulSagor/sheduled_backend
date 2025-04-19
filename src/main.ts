@@ -1,3 +1,6 @@
+import crypto from 'crypto';
+(global as any).crypto = crypto; // ✅ Polyfill for TypeORM's use of crypto.randomUUID()
+
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 

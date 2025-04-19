@@ -9,6 +9,7 @@ import { ScheduledCall } from './scheduler/scheduled-call.entity';
 import { ScheduleModule } from '@nestjs/schedule';
 import { AuthModule } from './auth/auth.module';
 import { Device } from './auth/device.entity';
+import { SaveNumberModule } from './save_number/save-number.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { Device } from './auth/device.entity';
     CallsModule,
     ScheduledCallsModule,
     AuthModule,
+    SaveNumberModule
   ],
   controllers: [AppController],
   providers: [AppService],

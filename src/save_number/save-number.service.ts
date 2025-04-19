@@ -56,4 +56,22 @@ export class SaveNumberService {
       results,
     };
   }
+
+  async findAllByDeviceId(deviceId: string) {
+    if (!deviceId) {
+      return { status: 'error', message: 'deviceId is required' };
+    }
+  
+    const numbers = await this.numberRepo.find({
+      where: { deviceId },
+      order: { createdAt: 'DESC' },
+    });
+  
+    return {
+      status: 'success',
+      total: numbers.length,
+      data: numbers,
+    };
+  }
+  
 }

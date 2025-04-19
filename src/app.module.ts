@@ -10,6 +10,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { AuthModule } from './auth/auth.module';
 import { Device } from './auth/device.entity';
 import { SaveNumberModule } from './save_number/save-number.module';
+import { SaveNumber } from './save_number/save-number.entity';
 
 @Module({
   imports: [
@@ -21,7 +22,7 @@ import { SaveNumberModule } from './save_number/save-number.module';
       useFactory: async (config: ConfigService) => ({
         type: 'postgres',
         url: config.get<string>('DATABASE_URL'), // ✅ Use Railway plugin variable
-        entities: [ScheduledCall, Device],
+        entities: [ScheduledCall, Device,SaveNumber],
         synchronize: true,
       }),
     }),

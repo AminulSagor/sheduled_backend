@@ -7,7 +7,11 @@ export class ScheduledCallsCron {
   constructor(private readonly scheduledCallsService: ScheduledCallsService) {}
 
   @Cron(CronExpression.EVERY_MINUTE, { name: 'process_pending_calls' })
-  async handleCron() {
+async handleCron() {
+  const enabled = process.env.ENABLE_CRON === 'true';
+  if (enabled) {
     await this.scheduledCallsService.processPendingCalls();
   }
+}
+
 }

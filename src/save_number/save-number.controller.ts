@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Post, Query } from '@nestjs/common';
 import { SaveNumberService } from './save-number.service';
 
 @Controller('save-number')
@@ -18,6 +18,14 @@ async save(@Body() body: any) {
 @Get()
   async getAllByDevice(@Query('deviceId') deviceId: string) {
     return this.saveNumberService.findAllByDeviceId(deviceId);
+  }
+
+  @Delete()
+  async deleteByNumber(
+    @Query('deviceId') deviceId: string,
+    @Query('phoneNumber') phoneNumber: string,
+  ) {
+    return this.saveNumberService.deleteByPhoneNumber(deviceId, phoneNumber);
   }
 
 }

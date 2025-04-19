@@ -73,5 +73,21 @@ export class SaveNumberService {
       data: numbers,
     };
   }
+
+  async deleteByPhoneNumber(deviceId: string, phoneNumber: string) {
+    if (!deviceId || !phoneNumber) {
+      return { status: 'error', message: 'deviceId and phoneNumber are required' };
+    }
+  
+    const existing = await this.numberRepo.findOne({ where: { deviceId, phoneNumber } });
+  
+    if (!existing) {
+      return { status: 'not_found', message: 'Number not found for this device' };
+    }
+  
+    await this.numberRepo.remove(existing);
+    return { status: 'deleted', message: 'Number deleted successfully' };
+  }
+  
   
 }

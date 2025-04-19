@@ -11,6 +11,8 @@ import { AuthModule } from './auth/auth.module';
 import { Device } from './auth/device.entity';
 import { SaveNumberModule } from './save_number/save-number.module';
 import { SaveNumber } from './save_number/save-number.entity';
+import { VoiceModule } from './save_voice/voice.module';
+import { Voice } from './save_voice/voice.entity';
 
 @Module({
   imports: [
@@ -22,14 +24,16 @@ import { SaveNumber } from './save_number/save-number.entity';
       useFactory: async (config: ConfigService) => ({
         type: 'postgres',
         url: config.get<string>('DATABASE_URL'), // ✅ Use Railway plugin variable
-        entities: [ScheduledCall, Device,SaveNumber],
+        entities: [ScheduledCall, Device,SaveNumber,Voice],
         synchronize: true,
       }),
     }),
     CallsModule,
     ScheduledCallsModule,
     AuthModule,
-    SaveNumberModule
+    SaveNumberModule,
+    VoiceModule
+
   ],
   controllers: [AppController],
   providers: [AppService],

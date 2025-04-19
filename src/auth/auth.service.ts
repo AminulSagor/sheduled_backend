@@ -13,16 +13,19 @@ export class AuthService {
   ) {}
 
   async validateDevice(deviceId: string): Promise<{ status: string }> {
-    if (!deviceId) return { status: 'error: deviceId is required' };
-
-    let device = await this.deviceRepo.findOne({ where: { deviceId } });
-
-    if (!device) {
-      device = this.deviceRepo.create({ deviceId });
-      await this.deviceRepo.save(device);
-      return { status: 'registered' };
+    if (!deviceId) {
+      return { status: 'error: deviceId is required' };
     }
 
-    return { status: 'logged-in' };
+    const existingDevice = await this.deviceRepo.findOne({ where: { deviceId } });
+
+    if (existingDevice) {
+      return { status: 'logged-in' };
+    }
+
+    const newDevice = this.deviceRepo.create({ deviceId });
+    await this.deviceRepo.save(newDevice);
+    return { status: 'registered' };
   }
 }
+

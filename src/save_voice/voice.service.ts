@@ -30,4 +30,19 @@ export class VoiceService {
   async findAllByDevice(deviceId: string) {
     return this.voiceRepo.find({ where: { deviceId } });
   }
+
+  async deleteByName(deviceId: string, voiceName: string) {
+    if (!deviceId || !voiceName) {
+      return { status: 'error', message: 'deviceId and voiceName are required' };
+    }
+  
+    const voice = await this.voiceRepo.findOne({ where: { deviceId, voiceName } });
+    if (!voice) {
+      return { status: 'not_found', message: 'Voice not found' };
+    }
+  
+    await this.voiceRepo.remove(voice);
+    return { status: 'deleted', message: 'Voice deleted successfully' };
+  }
+  
 }

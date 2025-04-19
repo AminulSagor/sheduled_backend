@@ -1,4 +1,4 @@
-import { Controller, Post, Body, Get, Query } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query, Delete } from '@nestjs/common';
 import { VoiceService } from './voice.service';
 
 @Controller('voice')
@@ -15,4 +15,13 @@ export class VoiceController {
   async listVoices(@Query('deviceId') deviceId: string) {
     return this.voiceService.findAllByDevice(deviceId);
   }
+
+  @Delete()
+async deleteVoice(
+  @Query('deviceId') deviceId: string,
+  @Query('voiceName') voiceName: string,
+) {
+  return this.voiceService.deleteByName(deviceId, voiceName);
+}
+
 }

@@ -6,7 +6,7 @@ import { ScheduledCallsService } from './scheduled-calls.service';
 export class ScheduledCallsCron {
   constructor(private readonly scheduledCallsService: ScheduledCallsService) {}
 
-  @Cron(CronExpression.EVERY_MINUTE)
+  @Cron(CronExpression.EVERY_MINUTE, { name: 'process_pending_calls' })
   async handleCron() {
     await this.scheduledCallsService.processPendingCalls();
   }

@@ -13,6 +13,7 @@ import { SaveNumberModule } from './save_number/save-number.module';
 import { SaveNumber } from './save_number/save-number.entity';
 import { VoiceModule } from './save_voice/voice.module';
 import { Voice } from './save_voice/voice.entity';
+import { TwimlModule } from './twiml/twiml.module';
 
 @Module({
   imports: [
@@ -32,7 +33,8 @@ import { Voice } from './save_voice/voice.entity';
     ScheduledCallsModule,
     AuthModule,
     SaveNumberModule,
-    VoiceModule
+    VoiceModule,
+    TwimlModule
 
   ],
   controllers: [AppController],

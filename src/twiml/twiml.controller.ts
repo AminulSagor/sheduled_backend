@@ -10,8 +10,8 @@ export class TwimlController {
 
     const twimlResponse = `<?xml version="1.0" encoding="UTF-8"?>
     <Response>
-      <Say voice="woman">Thanks for trying our documentation. Enjoy!</Say>
-      <Play>https://firebasestorage.googleapis.com/v0/b/instagram-clone-f45ae.appspot.com/o/twiml.xml?alt=media</Play>
+      <Say voice="woman">ebar cholbe insallah</Say>
+      <Play>https://utomiwubfeyxyfkkmril.supabase.co/storage/v1/object/public/library//dont-talk-315229.mp3</Play>
     </Response>`;
 
     return twimlResponse;

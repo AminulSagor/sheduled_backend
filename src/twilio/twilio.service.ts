@@ -25,7 +25,7 @@ export class TwilioService {
       throw new Error('NGROK_BASE_URL is not defined in env');
     }
 
-    const twimlUrl = `${baseUrl}/twiml?audio=${encodeURIComponent(audioUrl)}`;
+    const twimlUrl = `${baseUrl}/twiml/call/${encodeURIComponent(audioUrl)}`;
 
     const response = await this.client.calls.create({
       to,

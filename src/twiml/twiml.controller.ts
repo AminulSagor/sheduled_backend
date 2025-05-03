@@ -1,19 +1,13 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Param, Header } from '@nestjs/common';
+import { TwimlService } from './twiml.service';
 
 @Controller('twiml')
 export class TwimlController {
+  constructor(private readonly twimlService: TwimlService) {}
 
-  @Post('call')
-  handlePostRequest(@Body() body: any) {
-    // Here you can process the incoming POST request body if needed
-    // You can also fetch a file URL dynamically based on input
-
-    const twimlResponse = `<?xml version="1.0" encoding="UTF-8"?>
-    <Response>
-      <Say voice="woman">ebar cholbe insallah</Say>
-      <Play>https://utomiwubfeyxyfkkmril.supabase.co/storage/v1/object/public/library//dont-talk-315229.mp3</Play>
-    </Response>`;
-
-    return twimlResponse;
+  @Post('call/:id')
+  @Header('Content-Type', 'text/xml')
+  async handlePostRequest(@Param('id') id: string): Promise<string> {
+    return this.twimlService.generateVoiceTwimlById(Number(id));
   }
 }

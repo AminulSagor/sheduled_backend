@@ -9,5 +9,6 @@ import { ScheduledCallsService } from './scheduled-calls.service';
   imports: [TwilioModule, ScheduledCallsModule],
   controllers: [CallsController],
   providers: [CallsService,ScheduledCallsService],
+  exports: [ScheduledCallsService], 
 })
 export class CallsModule {}

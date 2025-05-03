@@ -10,8 +10,12 @@ export class CallsService {
     private readonly scheduledCallRepo: Repository<ScheduledCall>,
   ) {}
 
-  async scheduleCall(toList: string[], audioUrl: string, callAt: Date): Promise<ScheduledCall[]> {
+  async scheduleCall(toList: string[], audioId: string, callAt: Date): Promise<ScheduledCall[]> {
     const results: ScheduledCall[] = [];
+
+    // 👇 Construct full audio URL here
+    const baseUrl = 'https://sheduledbackend-production.up.railway.app/twiml/call/';
+    const audioUrl = `${baseUrl}${audioId}`;
 
     for (const to of toList) {
       const newCall = this.scheduledCallRepo.create({

@@ -6,7 +6,10 @@ export class CallsController {
   constructor(private readonly callsService: CallsService) {}
 
   @Post('schedule')
-  scheduleCall(@Body() body: { to: string; audioUrl: string; callAt: string }) {
-    return this.callsService.scheduleCall(body.to, body.audioUrl, new Date(body.callAt));
+  async scheduleCall(
+    @Body() body: { to: string | string[]; audioUrl: string; callAt: string }
+  ) {
+    const toNumbers = Array.isArray(body.to) ? body.to : [body.to];
+    return this.callsService.scheduleCall(toNumbers, body.audioUrl, new Date(body.callAt));
   }
 }

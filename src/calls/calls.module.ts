@@ -1,14 +1,16 @@
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { CallsController } from './calls.controller';
 import { CallsService } from './calls.service';
 import { TwilioModule } from '../twilio/twilio.module';
-import { ScheduledCallsModule } from '../scheduler/scheduled-calls.module';
-import { ScheduledCallsService } from './scheduled-calls.service';
+import { ScheduledCall } from '../scheduler/scheduled-call.entity';
 
 @Module({
-  imports: [TwilioModule, ScheduledCallsModule],
+  imports: [
+    TypeOrmModule.forFeature([ScheduledCall]), // ✅ Register entity here
+    TwilioModule,
+  ],
   controllers: [CallsController],
-  providers: [CallsService,ScheduledCallsService],
-  exports: [ScheduledCallsService], 
+  providers: [CallsService],
 })
 export class CallsModule {}

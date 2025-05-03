@@ -25,7 +25,7 @@ import { TwimlModule } from './twiml/twiml.module';
       useFactory: async (config: ConfigService) => ({
         type: 'postgres',
         url: config.get<string>('DATABASE_URL'), // ✅ Use Railway plugin variable
-        entities: [ScheduledCall, Device,SaveNumber,Voice,ScheduledCall],
+        entities: [ScheduledCall, Device,SaveNumber,Voice],
         synchronize: true,
       }),
     }),
